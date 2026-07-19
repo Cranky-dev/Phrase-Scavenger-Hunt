@@ -1,1 +1,13 @@
+name: SpawnScavengerHunt
+version: 1.0
+main: com.yourname.scavengerhunt.ScavengerHunt
+api-version: '1.21'
+commands:
+  guess:
+    description: Guess the hidden scavenger hunt phrase.
+    usage: /guess <phrase>
+  ahunt:
+    description: Opens the graphical GUI control panel.
+    usage: /ahunt
+    permission: scavengerhunt.admin
 
