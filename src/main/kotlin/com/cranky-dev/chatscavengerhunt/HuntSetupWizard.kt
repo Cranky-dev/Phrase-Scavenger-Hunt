@@ -1,4 +1,4 @@
-package com.cranky-dev.chatscavengerhunt 
+package com.cranky_dev.chatscavengerhunt 
 
 import org.bukkit.conversations.ConversationContext
 import org.bukkit.conversations.Prompt
