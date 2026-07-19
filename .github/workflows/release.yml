@@ -1,0 +1,54 @@
+name: Generate Automated Release
+
+on:
+  push:
+    branches: [ "main", "master" ] # Fires on normal pushes AND direct web edit saves
+    paths:
+      - 'src/**'                  # ONLY triggers if actual source code files change
+      - 'build.gradle.kts'
+      - 'src/main/resources/plugin.yml'
+
+# Grants the workflow write access to create tags and release uploads
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Download your repository source code
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    # 2. Setup Java 21 for modern Paper compilation
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: 'gradle'
+
+    # 3. Give permissions to execution wrapper
+    - name: Grant Execute Permissions to Gradle
+      run: chmod +x ./gradlew
+
+    # 4. Compile the Kotlin code and bundle libraries into the Fat JAR
+    - name: Build Fat JAR via Shadow
+      run: ./gradlew build
+
+    # 5. Automatically create a Git Tag and deploy the production Release
+    - name: Deploy GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v1.0.${{ github.run_number }} # Generates v1.0.1, v1.0.2, etc. automatically
+        name: Scavenger Hunt Release v1.0.${{ github.run_number }}
+        body: |
+          🤖 **Automated Plugin Update Build**
+          This release was generated automatically following code adjustments.
+          
+          **Commit Message:** ${{ github.event.head_commit.message }}
+          **Triggered By:** @${{ github.actor }}
+        draft: false
+        prerelease: false
+        files: build/libs/*-all.jar # Grabs the completed .jar file and attaches it to the release
