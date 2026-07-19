@@ -1,4 +1,4 @@
-package com.cranky-dev.chatscavengerhunt
+package com.cranky_dev.chatscavengerhunt
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
