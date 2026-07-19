@@ -3,7 +3,7 @@ plugins {
     id("com.gradleup.shadow") version "8.3.5"
 }
 
-group = "com.cranky-dev.chatscavengerhunt"
+group = "com.cranky_dev.chatscavengerhunt"
 version = "1.0"
 
 repositories {
