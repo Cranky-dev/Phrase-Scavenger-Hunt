@@ -1,4 +1,4 @@
-package com.cranky-dev.chatscavengerhunt
+package com.cranky_dev.chatscavengerhunt
 
 import org.bukkit.Bukkit
 import org.bukkit.Material
