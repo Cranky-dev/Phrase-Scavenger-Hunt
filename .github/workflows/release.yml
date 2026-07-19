@@ -9,7 +9,7 @@ on:
       - 'src/main/resources/plugin.yml'
 
 permissions:
-  contents: write # Crucial: Allows GitHub to write and save the release artifacts
+  contents: write
 
 jobs:
   release:
@@ -17,33 +17,32 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v4.2.2 # Fixed version wrapper
+      uses: actions/checkout@v4
 
-    # Setting up Java with proper secure environment handshakes
     - name: Set up JDK 21
-      uses: actions/setup-java@v4.7.0 # Fixed version wrapper
+      uses: actions/setup-java@v5
       with:
         java-version: '21'
         distribution: 'temurin'
-        cache: 'gradle'
 
-    - name: Grant Execute Permissions to Gradle
-      run: chmod +x ./gradlew
+    # This sets up Gradle dynamically on the virtual machine, bypassing your missing gradlew script!
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.5' # Forces the runner to use Gradle 8.5 automatically
 
+    # Compiles using the runner's globally configured gradle engine instead of the local script wrapper
     - name: Build Fat JAR via Shadow
-      run: ./gradlew build
+      run: gradle build
 
     - name: Deploy GitHub Release
-      uses: softprops/action-gh-release@v2.0.9 # Fixed version wrapper
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: v1.0.${{ github.run_number }}
         name: Scavenger Hunt Release v1.0.${{ github.run_number }}
         body: |
           🤖 **Automated Plugin Update Build**
           This release was generated automatically following code adjustments.
-          
-          **Commit Message:** ${{ github.event.head_commit.message }}
-          **Triggered By:** @${{ github.actor }}
         draft: false
         prerelease: false
         files: build/libs/*-all.jar
