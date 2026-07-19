@@ -1,9 +1,9 @@
 plugins {
     kotlin("jvm") version "2.1.0"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.gradleup.shadow") version "8.3.5"
 }
 
-group = "com.yourname.scavengerhunt"
+group = "com.cranky-dev.chatscavengerhunt"
 version = "1.0-SNAPSHOT"
 
 repositories {
