@@ -1,0 +1,21 @@
+plugins {
+    kotlin("jvm") version "2.1.0"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+}
+
+group = "com.yourname.scavengerhunt"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+    maven("https://papermc.io")
+}
+
+dependencies {
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT") // Adjust version as needed
+    implementation(kotlin("stdlib"))
+}
+
+tasks {
+    assemble { dependsOn(shadowJar) }
+}
