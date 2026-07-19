@@ -1,6 +1,6 @@
 name: SpawnScavengerHunt
 version: 1.1
-main: com.yourname.chatscavengerhunt.ScavengerHunt
+main: com.cranky_dev.chatscavengerhunt.ScavengerHunt
 api-version: '1.21'
 commands:
   guess:
