@@ -1,6 +1,6 @@
 name: SpawnScavengerHunt
 version: 1.0
-main: com.yourname.scavengerhunt.ScavengerHunt
+main: com.yourname.chatscavengerhunt.ScavengerHunt
 api-version: '1.21'
 commands:
   guess:
@@ -10,4 +10,5 @@ commands:
     description: Opens the graphical GUI control panel.
     usage: /ahunt
     permission: scavengerhunt.admin
+
 
