@@ -1,5 +1,5 @@
 name: SpawnScavengerHunt
-version: 1.0
+version: 1.1
 main: com.yourname.chatscavengerhunt.ScavengerHunt
 api-version: '1.21'
 commands:
